@@ -5,21 +5,35 @@
 
 var stringifyJSON = function(obj) {
   if (typeof obj === 'string') {
-    return `'${obj}'`;
+    return `"${obj}"`;
   }
   
   if (typeof obj === 'number') {
-    return `'${obj}'`;
+    return `${obj}`;
   }
   
   if (typeof obj === 'boolean') {
-    return `'${obj}'`;
+    return `${obj}`;
   }
   
-  if (obj === undefined) {
-    return `'null'`;
+  if (obj == undefined) {
+    return 'null';
   }
   
+  if (Array.isArray(obj)) {
+    var result = '';
+    result += '[';
+    for (var i = 0; i < obj.length; i++) {
+      result += `${obj[i]},`;
+    };
+    
+    if (obj.length > 0) {
+      result = result.slice(0, -1);
+    }
+    
+    result += ']';
+    return result;
+  }
   //wraps input into quotes
   //input: number type output: '2'
   //input: undefined output: 'null'
