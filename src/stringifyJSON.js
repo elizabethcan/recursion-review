@@ -4,5 +4,17 @@
 // but you don't so you're going to write it from scratch:
 
 var stringifyJSON = function(obj) {
-  // your code goes here
+  if (typeof obj === 'string') {
+    return '\'obj\'';
+  }
+  //wraps input into quotes
+  //input: number type output: '2'
+  //input: undefined output: 'null'
+  //input: boolean output: 'true'/'false'
+  //input: string output: ''abc''
+  
+  //input: array output: '[]'
+  
+  //input: object output: '{}'
+  
 };
