@@ -5,23 +5,9 @@
 
 var stringifyJSON = function(obj) {
   var result = ''
-  if (typeof obj === 'string') {
-    result += `"${obj}"`;
-  }
-  
-  if (typeof obj === 'number') {
-    result += `${obj}`;
-  }
-  
-  if (typeof obj === 'boolean') {
-    result += `${obj}`;
-  }
-  
   if (obj == undefined) {
     result += 'null';
-  }
-  
-  if (Array.isArray(obj)) {
+  } else if (Array.isArray(obj)) {
     result += '[';
     for (var i = 0; i < obj.length; i++) {
       result += `${stringifyJSON(obj[i])},`;
@@ -32,7 +18,29 @@ var stringifyJSON = function(obj) {
     }
     
     result += ']';
-  }
+  } else if (typeof obj === 'object') {
+    result += '{';
+    
+    for (var key in obj) {
+      if (obj[key] !== undefined && typeof obj[key] !== 'function') { 
+        result += `${stringifyJSON(key)}:${stringifyJSON(obj[key])},`;
+      }
+    }
+    
+    if (result[result.length - 1] === ',') {
+      result = result.slice(0, -1);
+    }
+    
+    result += '}';
+    
+  } else if (typeof obj === 'string') {
+    result += `"${obj}"`;
+  } else if (typeof obj === 'number') {
+    result += `${obj}`;
+  } else if (typeof obj === 'boolean') {
+    result += `${obj}`;
+  } 
+
   //wraps input into quotes
   //input: number type output: '2'
   //input: undefined output: 'null'
