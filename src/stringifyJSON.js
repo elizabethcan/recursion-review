@@ -4,27 +4,27 @@
 // but you don't so you're going to write it from scratch:
 
 var stringifyJSON = function(obj) {
+  var result = ''
   if (typeof obj === 'string') {
-    return `"${obj}"`;
+    result += `"${obj}"`;
   }
   
   if (typeof obj === 'number') {
-    return `${obj}`;
+    result += `${obj}`;
   }
   
   if (typeof obj === 'boolean') {
-    return `${obj}`;
+    result += `${obj}`;
   }
   
   if (obj == undefined) {
-    return 'null';
+    result += 'null';
   }
   
   if (Array.isArray(obj)) {
-    var result = '';
     result += '[';
     for (var i = 0; i < obj.length; i++) {
-      result += `${obj[i]},`;
+      result += `${stringifyJSON(obj[i])},`;
     };
     
     if (obj.length > 0) {
@@ -32,7 +32,6 @@ var stringifyJSON = function(obj) {
     }
     
     result += ']';
-    return result;
   }
   //wraps input into quotes
   //input: number type output: '2'
@@ -43,5 +42,5 @@ var stringifyJSON = function(obj) {
   //input: array output: '[]'
   
   //input: object output: '{}'
-  
+  return result;
 };
