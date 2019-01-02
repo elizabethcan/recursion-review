@@ -5,8 +5,21 @@
 
 var stringifyJSON = function(obj) {
   if (typeof obj === 'string') {
-    return '\'obj\'';
+    return `'${obj}'`;
   }
+  
+  if (typeof obj === 'number') {
+    return `'${obj}'`;
+  }
+  
+  if (typeof obj === 'boolean') {
+    return `'${obj}'`;
+  }
+  
+  if (obj === undefined) {
+    return `'null'`;
+  }
+  
   //wraps input into quotes
   //input: number type output: '2'
   //input: undefined output: 'null'
