@@ -35,20 +35,8 @@ var stringifyJSON = function(obj) {
     
   } else if (typeof obj === 'string') {
     result += `"${obj}"`;
-  } else if (typeof obj === 'number') {
+  } else {
     result += `${obj}`;
-  } else if (typeof obj === 'boolean') {
-    result += `${obj}`;
-  } 
-
-  //wraps input into quotes
-  //input: number type output: '2'
-  //input: undefined output: 'null'
-  //input: boolean output: 'true'/'false'
-  //input: string output: ''abc''
-  
-  //input: array output: '[]'
-  
-  //input: object output: '{}'
+  }
   return result;
 };
